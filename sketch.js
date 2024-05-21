@@ -1,10 +1,11 @@
-
 var trex ,trex_running;
 var ground;
 var groundImage, invisibleGround;
+var cloudImage;
 function preload (){
-trex_running = loadAnimation("trex1.png","trex3.png","trex4.png");
-groungImage = loadImage("ground2.png");
+  trex_running = loadAnimation("trex1.png","trex3.png","trex4.png");
+  groungImage = loadImage("ground2.png")
+ cloudImage = loadImage("cloud.png")
 
 }
 
@@ -25,14 +26,14 @@ groungImage = loadImage("ground2.png");
 
  invisibleGround = createSprite(200,190,400,10);
  invisibleGround.visible = false;
-
-}
-
+var rad = Math.round(random(1,100));
+console.log(rand)
+} 
 function draw(){
  background("white")
 
  ground.velocityX = -2;
- console.log(trex.y);
+ //console.log(frameCount);
 
  if(ground.x<0){
    ground.x = ground.width/2;
@@ -46,5 +47,18 @@ function draw(){
   //trex choca con el suelo
   trex.collide(invisibleGround);
   
+  //llamado de la funcion de nubes 
+  spawnClouds();
+
   drawSprites();
+  }
+  function spawnClouds(){
+    if(frameCount % 60 === 0) {
+  cloud = createSrite(600,100,40,10);
+  cloud.addImage(cloudImage)
+   cloud.y = Math.round(random(10,60));
+  cloud.scale = 0.4;
+  cloud.velocitX = -3;
+  
+  }
 }
